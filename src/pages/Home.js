@@ -13,7 +13,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Welcome to Club</h1>
+      <h2 className="heading">Home Page</h2>
     </div>
   )
 }
