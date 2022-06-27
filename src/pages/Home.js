@@ -1,19 +1,28 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
-import { baseUrl } from '../helpers/api'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styles from '../styles/Home.module.scss'
 
-const Home = () => {
-  useEffect(() => {
-    const getProfiles = async () => {
-      const res = await axios.get(`${baseUrl}auth/profiles/`)
-      console.log(res.data)
-    }
-    getProfiles()
-  }, [])
-
+const Home = ({ isLoggedIn }) => {
   return (
-    <div>
-      <h2 className="heading">Home Page</h2>
+    <div className={styles.homeWrapper}>
+      <div className={styles.heroWrapper}>
+        <div className={styles.buttonWrapper}>
+          {isLoggedIn ? (
+            <>
+              <Link to="/clubs/">
+                <button>Your Clubs</button>
+              </Link>
+              <Link to="/events/">
+                <button>Your Events</button>
+              </Link>
+            </>
+          ) : (
+            <Link to="/login/">
+              <button>Sign In</button>
+            </Link>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

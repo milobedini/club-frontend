@@ -1,23 +1,32 @@
 import React from 'react'
 import { Navbar, NavDropdown, Container, Nav } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getName, removeName, removeToken, removeUserId } from '../helpers/auth'
 
-// import styles from '../styles/Nav.module.scss'
+import styles from '../styles/Nav.module.scss'
 
 export default function Header({ isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate()
+
   const handleLogout = () => {
     removeToken()
     removeName()
     removeUserId()
     setIsLoggedIn(false)
-    window.location.reload()
+    navigate('/')
   }
 
   const user = getName()
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      // bg="dark"
+      variant="dark"
+      sticky="top"
+      className={styles.container}
+    >
       <Container>
         <Link to="/">
           <Navbar.Brand href="#home">Club</Navbar.Brand>
@@ -28,7 +37,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
-          <Nav>
+          <Nav className={styles.dropdown}>
             {isLoggedIn ? (
               <>
                 <NavDropdown

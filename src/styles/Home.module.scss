@@ -1,0 +1,40 @@
+.heroWrapper {
+    background-image: url('../images/clay.jpg');
+    min-height: 95vh;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: center;
+    button {
+    background-color: #f1faee;
+    margin: 1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+     
+            width: 150px;
+            height: 50px;
+            cursor: pointer;
+            font-weight: 400;
+            color: #f1faee;
+            background: #0c1527;
+            border: 2px solid #a8dadc;
+            border-radius: 10px;
+            box-shadow: 3px 3px 0 #1d3557
+        ;
+            transition: 500ms ease-in-out;
+       
+    }
+    button:hover {
+        box-shadow: 20px 5px 0 #1d366d, -20px -5px 0 #18cdba;
+    }
+    button:focus {
+        outline: none;
+    }
+}
+.dropdown {
+    background-color: #18cdba;
+}
