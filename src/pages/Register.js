@@ -50,63 +50,68 @@ const Register = () => {
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputDiv}>
             <input
               type="text"
               name="name"
               onChange={handleFormChange}
               id="name"
               placeholder="Your Name"
+              className={styles.input}
             />
             <label htmlFor="email"></label>
           </div>
         </div>
-        <div>
-          <div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputDiv}>
             <input
               type="email"
               name="email"
               onChange={handleFormChange}
               id="email"
               placeholder="Your Email"
+              className={styles.input}
             />
             <label htmlFor="email"></label>
           </div>
         </div>
-        <div>
-          <div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputDiv}>
             <input
               type="text"
               name="username"
               onChange={handleFormChange}
               id="username"
               placeholder="Your Username"
+              className={styles.input}
             />
             <label className="form-label" htmlFor="username"></label>
           </div>
         </div>
-        <div>
-          <div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputDiv}>
             <input
               type="password"
               name="password"
               onChange={handleFormChange}
               id="password"
               placeholder="Password"
+              className={styles.input}
             />
             <label className="form-label" htmlFor="password"></label>
           </div>
         </div>
-        <div>
-          <div>
+        <div className={styles.inputContainer}>
+          <div className={styles.inputDiv}>
             <input
               type="password"
               name="password_confirmation"
               onChange={handleFormChange}
               id="password_confirmation"
               placeholder="Repeat your password"
+              className={styles.input}
             />
             <label
               className="form-label"
@@ -114,13 +119,13 @@ const Register = () => {
             ></label>
           </div>
         </div>
-        <div>
+        <div className={styles.submitDiv}>
           <button type="button">
             <input type="submit" value="Register" />
           </button>
         </div>
         {isError ? (
-          <div className="error">
+          <div className={styles.error}>
             <p>Something went wrong. Please try again.</p>
           </div>
         ) : (
