@@ -125,6 +125,7 @@ const Register = () => {
           </button>
         </div>
         {isError ? (
+          // use better error messages below.
           <div className={styles.error}>
             <p>Something went wrong. Please try again.</p>
           </div>

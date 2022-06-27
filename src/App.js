@@ -15,10 +15,8 @@ function App() {
   // Change to useContext or Redux to manage user state rather than prop drilling
   useEffect(() => {
     if (getToken()) {
-      console.log('Got Token')
       setIsLoggedIn(true)
     } else {
-      console.log('Didnt get token')
       setIsLoggedIn(false)
     }
   }, [])
@@ -30,7 +28,10 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={<Login setIsLoggedIn={setIsLoggedIn} />}
+            />
             <Route path="/register" element={<Register />} />
           </Routes>
         </main>

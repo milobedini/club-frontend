@@ -1,8 +1,21 @@
 import React from 'react'
 import { Navbar, NavDropdown, Container, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { getName, removeName, removeToken, removeUserId } from '../helpers/auth'
+
+// import styles from '../styles/Nav.module.scss'
 
 export default function Header({ isLoggedIn, setIsLoggedIn }) {
+  const handleLogout = () => {
+    removeToken()
+    removeName()
+    removeUserId()
+    setIsLoggedIn(false)
+    window.location.reload()
+  }
+
+  const user = getName()
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -14,35 +27,33 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
           <Nav className="me-auto">
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
           <Nav>
             {isLoggedIn ? (
               <>
-                <Nav.Link href="#deets">More Deets</Nav.Link>
-                <Link to="/login">
-                  <Nav.Link eventKey={2} href="#memes">
+                <NavDropdown
+                  title={user}
+                  id="collapsible-nav-dropdown"
+                  className="text-black"
+                >
+                  <NavDropdown.Item href="#action/3.1">
+                    Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">Inbox</NavDropdown.Item>
+
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>
                     Sign Out
-                  </Nav.Link>
-                </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
               </>
             ) : (
               <>
                 <Link to="/register">
-                  <Nav.Link href="#deets">Register</Nav.Link>
+                  <Nav.Link href="register">Register</Nav.Link>
                 </Link>
                 <Link to="/login">
-                  <Nav.Link eventKey={2} href="#memes">
+                  <Nav.Link eventKey={2} href="sign-in">
                     Sign In
                   </Nav.Link>
                 </Link>
