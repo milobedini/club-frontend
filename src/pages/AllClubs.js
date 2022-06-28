@@ -2,15 +2,15 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import ClubCard from '../components/ClubCard'
-import { getSquads } from '../helpers/api'
+import { getConfig } from '../helpers/api'
 import styles from '../styles/ClubList.module.scss'
 
-const ClubList = () => {
+const AllClubs = () => {
   const [clubs, setClubs] = useState([])
 
   useEffect(() => {
     const getClubs = async () => {
-      const config = getSquads()
+      const config = getConfig()
       try {
         const res = await axios(config)
         console.log(res.data)
@@ -30,4 +30,4 @@ const ClubList = () => {
   )
 }
 
-export default ClubList
+export default AllClubs

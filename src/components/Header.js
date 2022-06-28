@@ -58,14 +58,10 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
               </>
             ) : (
               <>
-                <Link to="/register">
-                  <Nav.Link href="register">Register</Nav.Link>
-                </Link>
-                <Link to="/login">
-                  <Nav.Link eventKey={2} href="sign-in">
-                    Sign In
-                  </Nav.Link>
-                </Link>
+                <Nav.Link href="/register/">Register</Nav.Link>
+                <Nav.Link eventKey={2} href="/login/">
+                  Sign In
+                </Nav.Link>
               </>
             )}
           </Nav>

@@ -9,7 +9,7 @@ const Home = ({ isLoggedIn }) => {
         <div className={styles.buttonWrapper}>
           {isLoggedIn ? (
             <>
-              <Link to="/clubs/">
+              <Link to="/clubs/user/">
                 <button>Your Clubs</button>
               </Link>
               <Link to="/events/">

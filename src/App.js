@@ -8,8 +8,9 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import ClubList from './pages/ClubList'
+
 import EventList from './pages/EventList'
+import UserClubs from './pages/UserClubs'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -35,7 +36,9 @@ function App() {
               element={<Login setIsLoggedIn={setIsLoggedIn} />}
             />
             <Route path="/register/" element={<Register />} />
-            <Route path="/clubs/" element={<ClubList />} />
+            {/* <Route path="/clubs/all/" element={<ClubList />} /> */}
+            <Route path="/clubs/user/" element={<UserClubs />} />
+
             <Route path="/events/" element={<EventList />} />
           </Routes>
         </main>
