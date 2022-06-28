@@ -30,7 +30,7 @@ const EventList = () => {
     return (
       <div className={styles.container}>
         {userEvents.map((fixture) => (
-          <EventCard key={fixture.id} {...fixture} />
+          <EventCard key={fixture.id} {...fixture} title />
         ))}
       </div>
     )

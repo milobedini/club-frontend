@@ -10,11 +10,12 @@ const EventCard = ({
   total_players,
   participants,
   financier,
+  title,
 }) => {
   return (
     <div>
       <Link to={`/events/${club.id}/${id}/`}>
-        <h2>{club.name}'s fixture.</h2>
+        {title ? <h2>{club.name}'s fixture.</h2> : null}
         <h5>
           {location} at {time}
         </h5>

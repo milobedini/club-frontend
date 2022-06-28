@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getConfig } from '../helpers/api'
 
 const EventShow = () => {
@@ -25,11 +25,18 @@ const EventShow = () => {
         <p>Loading...</p>
       </div>
     )
-  } else if (event) {
+  } else if (event && event.club) {
     return (
       <div>
-        <h2>Event Information</h2>
-        <h3>{event.club.name}'s fixture.</h3>
+        <div>
+          <h2>Event Information</h2>
+          <h3>
+            <Link to={`/clubs/${clubId}/`}>
+              <span>{event.club.name}'s </span>
+            </Link>
+            fixture.
+          </h3>
+        </div>
         <h5>
           {event.location} at {event.time}
         </h5>

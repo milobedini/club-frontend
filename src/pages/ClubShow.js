@@ -2,7 +2,9 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import ClubEvents from '../components/ClubEvents'
 import { getConfig } from '../helpers/api'
+import FindUser from './FindUser'
 
 const ClubShow = () => {
   const [club, setClub] = useState({})
@@ -51,7 +53,16 @@ const ClubShow = () => {
         ) : (
           <p>Play based on availability.</p>
         )}
-        <button>Club Management</button>
+        <div>
+          <div>
+            <h3>Upcoming Events</h3>
+            <ClubEvents id={id} />
+          </div>
+          <div>
+            <button>Add Members</button>
+            <FindUser club={id} />
+          </div>
+        </div>
       </div>
     )
   }
