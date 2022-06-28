@@ -12,7 +12,6 @@ const UserClubs = () => {
       const config = getConfig('auth/profile')
       try {
         const res = await axios(config)
-        // console.log(res.data)
         setUserClubs(res.data.squads)
       } catch (err) {
         console.log(err)

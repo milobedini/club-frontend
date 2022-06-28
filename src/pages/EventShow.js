@@ -13,7 +13,6 @@ const EventShow = () => {
     const getFixture = async () => {
       const config = getConfig(`events/${clubId}/${id}`)
       const res = await axios(config)
-      console.log(res.data)
       setEvent(res.data)
     }
     getFixture()

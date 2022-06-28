@@ -14,7 +14,6 @@ const EventList = () => {
       try {
         const res = await axios(config)
         setUserEvents(res.data.attending)
-        console.log(res.data.attending)
       } catch (err) {
         console.log(err)
       }

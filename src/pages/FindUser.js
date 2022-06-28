@@ -3,29 +3,18 @@ import React from 'react'
 import { useState } from 'react'
 import { getConfig } from '../helpers/api'
 import styles from '../styles/Register.module.scss'
-import { toast } from 'react-toastify'
+import { success } from '../helpers/toast'
 
-const FindUser = ({ club }) => {
+const FindUser = ({ club, isAdmin, members, userId }) => {
   const [searchTerm, setSearchTerm] = useState('')
+
   const [results, setResults] = useState([])
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value)
-    console.log(searchTerm)
   }
-
-  const success = () =>
-    toast.success('User added to club.', {
-      position: 'bottom-center',
-      autoClose: 2500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -33,7 +22,6 @@ const FindUser = ({ club }) => {
     try {
       const res = await axios(config)
       setResults(res.data)
-      console.log(res.data)
     } catch (err) {
       console.log(err)
     }
@@ -51,15 +39,20 @@ const FindUser = ({ club }) => {
     try {
       // eslint-disable-next-line
       const res = await axios(config)
-      success()
-
-      setTimeout(() => {
-        window.location.reload()
-      }, 3000)
+      success('User added to club.')
     } catch (err) {
-      //   console.log(err.response.data)
       handleError(err.response.data)
     }
+  }
+
+  const checkIfUserInClub = (result) => {
+    result.squads.forEach((squad) => {
+      console.log(squad)
+      if (squad.members.includes) {
+        console.log('Already in club!')
+        return true
+      } else return false
+    })
   }
 
   return (
@@ -92,6 +85,7 @@ const FindUser = ({ club }) => {
                 <li>
                   <p>{result.name}</p>
                   <p>{result.email}</p>
+                  {checkIfUserInClub(result) ? <p>Already in Club</p> : null}
                   <button onClick={() => addUser(result.id)}>
                     Add to Club
                   </button>

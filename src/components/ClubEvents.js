@@ -14,7 +14,6 @@ const ClubEvents = ({ id }) => {
       try {
         const res = await axios(config)
         setClubEvents(res.data)
-        console.log(res.data)
       } catch (err) {
         console.log(err)
       }

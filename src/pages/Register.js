@@ -22,7 +22,6 @@ const Register = () => {
       ...data,
       [name]: value,
     })
-    console.log(data)
   }
 
   const handleSuccess = () => {
@@ -39,9 +38,9 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
+      // eslint-disable-next-line
       const res = await axios.post(`${baseUrl}auth/register/`, data)
       handleSuccess()
-      console.log(res.data)
     } catch (err) {
       console.log(err)
       handleError()

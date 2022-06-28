@@ -42,7 +42,6 @@ const Login = ({ setIsLoggedIn }) => {
     event.preventDefault()
     try {
       const res = await axios.post(`${baseUrl}auth/login/`, data)
-      console.log(res.data)
       handleSuccess(res.data)
     } catch (err) {
       console.log(err)

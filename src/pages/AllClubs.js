@@ -13,7 +13,6 @@ const AllClubs = () => {
       const config = getConfig()
       try {
         const res = await axios(config)
-        console.log(res.data)
         setClubs(res.data)
       } catch (err) {
         console.log(err)
