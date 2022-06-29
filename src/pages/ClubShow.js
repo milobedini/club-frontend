@@ -95,7 +95,7 @@ const ClubShow = () => {
             <ul>
               {club.members.map((member) => (
                 <li key={member.id}>
-                  {member.name} - {member.email} -
+                  {member.name} - {member.email}
                   {admin ? (
                     <button onClick={() => removeUser(member.id)}>
                       Remove
