@@ -6,6 +6,9 @@ import styles from '../styles/Register.module.scss'
 import { success } from '../helpers/toast'
 
 const FindUser = ({ club, isAdmin, members, userId }) => {
+  // Will use isAdmin so that only admin squad members can add or remove others.
+  // Will use userId so that users can join or leave the squad.
+
   const [searchTerm, setSearchTerm] = useState('')
 
   const [results, setResults] = useState([])

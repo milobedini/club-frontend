@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ClubEvents from '../components/ClubEvents'
 import { getConfig } from '../helpers/api'
-import { getUserId } from '../helpers/auth'
+import { getName, getUserId } from '../helpers/auth'
 import { success } from '../helpers/toast'
 import FindUser from './FindUser'
 
@@ -16,6 +16,7 @@ const ClubShow = () => {
 
   const { id } = useParams()
   const userId = parseInt(getUserId())
+  const username = getName()
 
   useEffect(() => {
     const userId = parseInt(getUserId())
@@ -28,6 +29,7 @@ const ClubShow = () => {
         }
       })
       setClub(res.data)
+      console.log(res.data)
     }
     getClub()
   }, [id])
@@ -50,6 +52,23 @@ const ClubShow = () => {
     }
   }
 
+  const addAsAdmin = async (userId, add = true) => {
+    const config = getConfig(`squads/${id}/${userId}/admin`, 'put')
+
+    try {
+      // eslint-disable-next-line
+      const res = await axios(config)
+      if (add) {
+        success('User added as admin.')
+      } else if (!add) {
+        success('User removed from admin.')
+      }
+    } catch (err) {
+      console.log(err)
+      handleError(err.response.data)
+    }
+  }
+
   if (!club) {
     return (
       <div>
@@ -61,6 +80,13 @@ const ClubShow = () => {
       <div>
         <h2>Club Information</h2>
         <h3>{club.name}</h3>
+        {club.recurring ? (
+          <p>
+            Play every {club.weekday} at {club.venue}.
+          </p>
+        ) : (
+          <p>Play based on availability.</p>
+        )}
         {club.members.length === 0 ? (
           <p>This club has no current members.</p>
         ) : (
@@ -85,26 +111,67 @@ const ClubShow = () => {
             </ul>
           </div>
         )}
-        {club.recurring ? (
-          <p>
-            Play every {club.weekday} at {club.venue}.
-          </p>
-        ) : (
-          <p>Play based on availability.</p>
-        )}
+        {!admin ? (
+          <div>
+            <p>
+              Please contact any admin member if you wish to join or leave{' '}
+              {club.name}:
+            </p>
+            <ul>
+              {club.admin_members.map((admin) => (
+                <li key={admin.id}>
+                  {admin.name} - {admin.email}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         <div>
           <div>
             <h3>Upcoming Events</h3>
             <ClubEvents id={id} />
           </div>
-          <div>
-            <button>Add Members</button>
-            <FindUser
-              club={parseInt(id)}
-              members={club?.members}
-              userId={userId}
-            />
-          </div>
+
+          {admin ? (
+            <div>
+              <h3>{username}, control your club below:</h3>
+              <p>Add Members</p>
+              <FindUser
+                club={parseInt(id)}
+                members={club?.members}
+                userId={userId}
+              />
+              <h3>Manage Admin Control</h3>
+              <ul>
+                {console.log(club.members[0].admin_squads)}
+                {club.members.map((member) => (
+                  <li key={member.id}>
+                    {member.name} - {member.email}.
+                    {member?.admin_squads.map((squad) =>
+                      squad === club.id ? (
+                        <div key={squad}>
+                          <p>Already Admin</p>
+                          <button onClick={() => addAsAdmin(member.id, false)}>
+                            Remove as Admin
+                          </button>
+                        </div>
+                      ) : null
+                    )}
+                    {member.admin_squads.length === 0 ? (
+                      <button onClick={() => addAsAdmin(member.id)}>
+                        Add as admin member.
+                      </button>
+                    ) : null}
+                    {isError ? (
+                      <div>
+                        <p>{errorMessage}</p>
+                      </div>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </div>
     )
