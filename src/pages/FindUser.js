@@ -45,14 +45,15 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
     }
   }
 
-  const checkIfUserInClub = (result) => {
-    result.squads.forEach((squad) => {
-      console.log(squad)
-      if (squad.members.includes) {
-        console.log('Already in club!')
-        return true
-      } else return false
-    })
+  const removeUser = async (userId) => {
+    const config = getConfig(`squads/${club}/${userId}`, 'put')
+    try {
+      // eslint-disable-next-line
+      const res = await axios(config)
+      success('User removed from club.')
+    } catch (err) {
+      handleError(err.response.data)
+    }
   }
 
   return (
@@ -88,9 +89,11 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
 
                   {result?.squads.map((squad) =>
                     squad.id === club ? (
-                      <div>
-                        <p key={squad.id}>Already in Club</p>
-                        <button>Remove from Club</button>
+                      <div key={squad.id}>
+                        <p>Already in Club</p>
+                        <button onClick={() => removeUser(result.id)}>
+                          Remove from Club
+                        </button>
                       </div>
                     ) : null
                   )}
