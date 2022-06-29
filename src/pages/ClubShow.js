@@ -99,7 +99,11 @@ const ClubShow = () => {
           </div>
           <div>
             <button>Add Members</button>
-            <FindUser club={id} members={club?.members} userId={userId} />
+            <FindUser
+              club={parseInt(id)}
+              members={club?.members}
+              userId={userId}
+            />
           </div>
         </div>
       </div>

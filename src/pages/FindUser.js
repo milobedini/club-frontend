@@ -85,10 +85,20 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
                 <li>
                   <p>{result.name}</p>
                   <p>{result.email}</p>
-                  {checkIfUserInClub(result) ? <p>Already in Club</p> : null}
-                  <button onClick={() => addUser(result.id)}>
-                    Add to Club
-                  </button>
+
+                  {result?.squads.map((squad) =>
+                    squad.id === club ? (
+                      <div>
+                        <p key={squad.id}>Already in Club</p>
+                        <button>Remove from Club</button>
+                      </div>
+                    ) : null
+                  )}
+                  {result.squads.length === 0 ? (
+                    <button onClick={() => addUser(result.id)}>
+                      Add to Club
+                    </button>
+                  ) : null}
 
                   {isError ? (
                     <div className={styles.error}>
