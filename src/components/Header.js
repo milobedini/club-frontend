@@ -45,9 +45,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
                   id="collapsible-nav-dropdown"
                   className="text-black"
                 >
-                  <NavDropdown.Item href="#action/3.1">
-                    Profile
-                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/profile/">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Inbox</NavDropdown.Item>
 
                   <NavDropdown.Divider />
