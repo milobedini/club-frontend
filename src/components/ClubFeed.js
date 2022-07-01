@@ -13,8 +13,8 @@ const ClubFeed = ({ id }) => {
   const handleError = (error) => {
     if (error) {
       setIsError(true)
-      setErrorMessage(error.detail)
-      console.log(error.detail)
+      setErrorMessage(error.response.data.detail)
+      console.log()
     }
   }
 
@@ -43,7 +43,7 @@ const ClubFeed = ({ id }) => {
     return (
       <div>
         {posts.map((post) => (
-          <PostCard key={post.id} {...post} errorMessage={errorMessage} />
+          <PostCard key={post.id} {...post} />
         ))}
       </div>
     )
