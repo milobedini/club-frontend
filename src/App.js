@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
 import Profile from './pages/Profile'
+import FindClub from './pages/FindClub'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -36,6 +37,7 @@ function App() {
         <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <main>
           <Routes>
+            {/* Auth Routes */}
             <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
             <Route
               path="/login/"
@@ -43,10 +45,13 @@ function App() {
             />
             <Route path="/register/" element={<Register />} />
             <Route path="/profile/" element={<Profile />} />
-            {/* <Route path="/clubs/all/" element={<ClubList />} /> */}
+
+            {/* Club Routes */}
             <Route path="/clubs/user/" element={<UserClubs />} />
             <Route path="/clubs/:id/" element={<ClubShow />} />
+            <Route path="/clubs/join/" element={<FindClub />} />
 
+            {/* Event Routes */}
             <Route path="/events/" element={<EventList />} />
             <Route path="/events/:clubId/:id/" element={<EventShow />} />
           </Routes>

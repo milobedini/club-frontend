@@ -6,7 +6,8 @@ import ClubEvents from '../components/ClubEvents'
 import { getConfig } from '../helpers/api'
 import { getName, getUserId } from '../helpers/auth'
 import { success } from '../helpers/toast'
-import FindUser from './FindUser'
+import FindUser from '../components/FindUser'
+import ClubFeed from '../components/ClubFeed'
 
 const ClubShow = () => {
   const [club, setClub] = useState({})
@@ -29,7 +30,6 @@ const ClubShow = () => {
         }
       })
       setClub(res.data)
-      console.log(res.data)
     }
     getClub()
   }, [id])
@@ -130,6 +130,11 @@ const ClubShow = () => {
           <div>
             <h3>Upcoming Events</h3>
             <ClubEvents id={id} />
+          </div>
+
+          <div>
+            <h3>Club Feed</h3>
+            <ClubFeed id={id} />
           </div>
 
           {admin ? (

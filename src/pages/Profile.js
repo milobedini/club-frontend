@@ -6,6 +6,10 @@ import { getConfig } from '../helpers/api'
 const Profile = () => {
   const [user, setUser] = useState({})
 
+  //   Should be able to change name.
+  // Should have links to your squads, admin squads, and your fixtures.
+  //   Eventually profile picture.
+
   useEffect(() => {
     const getProfile = async () => {
       const config = getConfig('auth/profile')

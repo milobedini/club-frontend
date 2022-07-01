@@ -10,7 +10,6 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
   // Will use userId so that users can join or leave the squad.
 
   const [searchTerm, setSearchTerm] = useState('')
-
   const [results, setResults] = useState([])
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')

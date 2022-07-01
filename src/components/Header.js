@@ -34,7 +34,7 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="/clubs/join/">Search Clubs</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Nav className={styles.dropdown}>
