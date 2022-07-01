@@ -18,6 +18,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Profile from './pages/Profile'
 import FindClub from './pages/FindClub'
+import MapTest from './pages/MapTest'
+import MapSearch from './pages/MapSearch'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -54,6 +56,10 @@ function App() {
             {/* Event Routes */}
             <Route path="/events/" element={<EventList />} />
             <Route path="/events/:clubId/:id/" element={<EventShow />} />
+
+            {/* Map Test */}
+            <Route path="/map/" element={<MapTest />} />
+            <Route path="/mapsearch/" element={<MapSearch />} />
           </Routes>
           <ToastContainer />
         </main>
