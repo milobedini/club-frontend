@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Form from '../components/Form'
+import MapForm from '../components/MapForm'
 import styled from 'styled-components'
 
 const MapSearch = () => {
@@ -8,7 +8,7 @@ const MapSearch = () => {
     <Wrapper>
       <ContentWrapper>
         <Title>Geocoding with Mapbox</Title>
-        <Form />
+        <MapForm />
       </ContentWrapper>
     </Wrapper>
   )
@@ -18,12 +18,13 @@ export default MapSearch
 
 const Wrapper = styled.div`
   background: #1a1433;
-  height: 100vh;
-  margin: 0 auto;
+  height: 100%;
+  width: 100%;
 `
 const ContentWrapper = styled.div`
   padding: 150px 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `
