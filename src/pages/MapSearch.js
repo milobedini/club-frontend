@@ -1,48 +1,38 @@
-import React, { useEffect } from 'react'
-import { useRef } from 'react'
-import { useState } from 'react'
+import React from 'react'
+
+import Form from '../components/Form'
+import styled from 'styled-components'
 
 const MapSearch = () => {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-12">
-          <form className="form-inline">
-            <div className="row">
-              <div className="col-xs-8 col-sm-10">
-                <div className="form-group">
-                  <label className="sr-only" htmlFor="address">
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control input-lg"
-                    id="address"
-                    placeholder="London"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="col-xs-4 col-sm-2">
-                <button type="submit" className="btn btn-default btn-lg">
-                  <span
-                    className="glyphicon glyphicon-search"
-                    aria-hidden="true"
-                  ></span>
-                </button>
-              </div>
-            </div>
-          </form>
-          <div className="row">
-            <div className="col-sm-12">
-              <p className="bg-info">London, United Kingdom</p>
-              <div className="map"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Wrapper>
+      <ContentWrapper>
+        <Title>Geocoding with Mapbox</Title>
+        <Form />
+      </ContentWrapper>
+    </Wrapper>
   )
 }
 
 export default MapSearch
+
+const Wrapper = styled.div`
+  background: #1a1433;
+  height: 100vh;
+  margin: 0 auto;
+`
+const ContentWrapper = styled.div`
+  padding: 150px 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+`
+
+const Title = styled.h1`
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+  color: #ffffff;
+  text-align: center;
+`
