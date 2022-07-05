@@ -5,7 +5,7 @@ import Map, {
   FullscreenControl,
   ScaleControl,
   GeolocateControl,
-} from '!react-map-gl'
+} from 'react-map-gl'
 import Pin from '../components/mapbox/pin'
 import { mapboxToken } from '../helpers/environment'
 import styled from 'styled-components'
