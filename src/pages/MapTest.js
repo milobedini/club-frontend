@@ -9,13 +9,19 @@ import Map, {
 import Pin from '../components/pin'
 import ControlPanel from '../components/controlPanel'
 import { mapboxToken } from '../helpers/environment'
+import { useParams } from 'react-router-dom'
 
 const MapTest = () => {
+  const { long, lat } = useParams()
+  const label = 'Home'
+
   const pin = useMemo(
     () => (
       <Marker
-        longitude={1.24}
-        latitude={52.53}
+        // longitude={1.24}
+        // latitude={52.53}
+        longitude={long}
+        latitude={lat}
         anchor="bottom"
         onClick={(e) => {
           // If we let the click event propagates to the map, it will immediately close the popup
@@ -23,10 +29,10 @@ const MapTest = () => {
           e.originalEvent.stopPropagation()
         }}
       >
-        <Pin />
+        <Pin label={label} />
       </Marker>
     ),
-    []
+    [long, lat]
   )
 
   return (
@@ -34,9 +40,9 @@ const MapTest = () => {
       <div style={{ height: '100vh' }}>
         <Map
           initialViewState={{
-            latitude: 52.53,
-            longitude: 1.24,
-            zoom: 13,
+            latitude: lat,
+            longitude: long,
+            zoom: 12,
             bearing: 0,
             pitch: 0,
           }}

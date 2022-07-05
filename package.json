@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",

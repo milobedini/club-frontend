@@ -59,7 +59,7 @@ export default function App() {
             <Route path="/events/:clubId/:id/" element={<EventShow />} />
 
             {/* Map Test */}
-            <Route path="/map/" element={<MapTest />} />
+            <Route path="/map/:long/:lat/" element={<MapTest />} />
             <Route path="/mapsearch/" element={<MapSearch />} />
           </Routes>
           <ToastContainer />
