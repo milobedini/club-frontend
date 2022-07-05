@@ -7,11 +7,9 @@ const MapForm = () => {
   const address = useInput('')
   const [lat, setLat] = useState(null)
   const [long, setLong] = useState(null)
+  const [zoom, setZoom] = useState(1)
 
-  // const handleSubmit = (event) => {
-  //   console.log('done')
-
-  // }
+  //https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/
 
   return (
     <Wrapper>
@@ -32,6 +30,7 @@ const MapForm = () => {
                   address.setSuggestions([])
                   setLong(suggestion.center[0])
                   setLat(suggestion.center[1])
+                  setZoom(13)
                   // console.log(suggestion.center[1], long, lat)
                 }}
               >
@@ -45,7 +44,7 @@ const MapForm = () => {
 
       <ResultWrapper>
         <MapWrapper>
-          <MapShow lat={lat} long={long} label="label" zoom={1} />
+          <MapShow lat={lat} long={long} label="label" zoom={zoom} />
         </MapWrapper>
       </ResultWrapper>
     </Wrapper>
