@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getConfig } from '../helpers/api'
+import { dateOptions, timeUntil } from '../helpers/date'
+import MapShow from './MapShow'
 
 const EventShow = () => {
   const [event, setEvent] = useState({})
@@ -36,9 +38,10 @@ const EventShow = () => {
             fixture.
           </h3>
         </div>
-        <h5>
-          {event.location} at {event.time}
-        </h5>
+        <p>{new Date(event.time).toLocaleDateString(undefined, dateOptions)}</p>
+        <p>
+          {event.location} in {timeUntil(new Date(event.time))}.
+        </p>
         <p>
           Currently {event.participants.length} spots out of{' '}
           {event.total_players} have been filled.
@@ -52,14 +55,25 @@ const EventShow = () => {
         </ul>
         {event.financier ? (
           <p>
-            {event.financier} paid £{event.total_cost} for this event.
+            {event.financier.name} paid £{event.total_cost} for this event.
           </p>
         ) : (
           <p>£{event.total_cost} is due for this event.</p>
         )}
+        {event.longitude && event.latitude ? (
+          <>
+            <h3>Location</h3>
+            <MapShow
+              long={event.longitude}
+              lat={event.latitude}
+              label={event.location}
+            />
+          </>
+        ) : null}
       </div>
     )
   }
+  return <p>Loading...</p>
 }
 
 export default EventShow

@@ -21,7 +21,6 @@ const FindClub = () => {
     const config = getConfig(`squads/search/${searchTerm}`)
     try {
       const res = await axios(config)
-      console.log(res.data)
       setResults(res.data)
     } catch (err) {
       console.log(err)

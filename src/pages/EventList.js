@@ -13,7 +13,9 @@ const EventList = () => {
       const config = getConfig('auth/profile')
       try {
         const res = await axios(config)
-        setUserEvents(res.data.attending)
+        setUserEvents(
+          res.data.attending.filter((x) => new Date(x.time) > new Date())
+        )
       } catch (err) {
         console.log(err)
       }

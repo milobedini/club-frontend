@@ -148,7 +148,6 @@ const ClubShow = () => {
               />
               <h3>Manage Admin Control</h3>
               <ul>
-                {console.log(club.members[0].admin_squads)}
                 {club.members.map((member) => (
                   <li key={member.id}>
                     {member.name} - {member.email}.
@@ -181,6 +180,8 @@ const ClubShow = () => {
       </div>
     )
   }
+
+  return null
 }
 
 export default ClubShow

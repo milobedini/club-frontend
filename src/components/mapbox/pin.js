@@ -23,9 +23,9 @@ function Pin({ size = 20, label }) {
 }
 
 const Label = styled.p`
-  color: red;
+  color: #e63946;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 18px;
 `
 
 export default React.memo(Pin)

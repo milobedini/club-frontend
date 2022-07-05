@@ -13,7 +13,7 @@ const ClubEvents = ({ id }) => {
       const config = getConfig(`events/${id}`)
       try {
         const res = await axios(config)
-        setClubEvents(res.data)
+        setClubEvents(res.data.filter((x) => new Date(x.time) > new Date()))
       } catch (err) {}
     }
     getClubEvents()

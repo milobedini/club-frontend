@@ -14,7 +14,7 @@ const ClubFeed = ({ id }) => {
     if (error) {
       setIsError(true)
       setErrorMessage(error.response.data.detail)
-      console.log()
+      console.log(error)
     }
   }
 
@@ -23,7 +23,6 @@ const ClubFeed = ({ id }) => {
       const config = getConfig(`posts/${id}`)
       try {
         const res = await axios(config)
-        console.log(res.data)
         setPosts(res.data)
       } catch (err) {
         console.log(err)
