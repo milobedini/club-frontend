@@ -20,8 +20,9 @@ import Profile from './pages/Profile'
 import FindClub from './pages/FindClub'
 import MapTest from './pages/MapTest'
 import MapSearch from './pages/MapSearch'
+import { render } from 'react-dom'
 
-function App() {
+export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // Change to useContext or Redux to manage user state rather than prop drilling
@@ -68,4 +69,6 @@ function App() {
   )
 }
 
-export default App
+export function renderToDom(container) {
+  render(<App />, container)
+}
