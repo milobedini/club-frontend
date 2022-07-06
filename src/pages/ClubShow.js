@@ -8,6 +8,7 @@ import { getName, getUserId } from '../helpers/auth'
 import { success } from '../helpers/toast'
 import FindUser from '../components/FindUser'
 import ClubFeed from '../components/ClubFeed'
+import styled from 'styled-components'
 
 const ClubShow = () => {
   const [club, setClub] = useState({})
@@ -77,79 +78,86 @@ const ClubShow = () => {
     )
   } else if (club && club.members) {
     return (
-      <div>
-        <h2>Club Information</h2>
-        <h3>{club.name}</h3>
-        {club.recurring ? (
-          <p>
-            Play every {club.weekday} at {club.venue}.
-          </p>
-        ) : (
-          <p>Play based on availability.</p>
-        )}
-        {club.members.length === 0 ? (
-          <p>This club has no current members.</p>
-        ) : (
-          <div>
-            <p>Currently {club.members.length} member(s).</p>
-            <ul>
-              {club.members.map((member) => (
-                <li key={member.id}>
-                  {member.name} - {member.email}
-                  {admin ? (
-                    <button onClick={() => removeUser(member.id)}>
-                      Remove
-                    </button>
-                  ) : null}
-                  {isError ? (
-                    <div>
-                      <p>{errorMessage}</p>
-                    </div>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {!admin ? (
-          <div>
-            <p>
-              Please contact any admin member if you wish to join or leave{' '}
-              {club.name}:
-            </p>
-            <ul>
-              {club.admin_members.map((admin) => (
-                <li key={admin.id}>
-                  {admin.name} - {admin.email}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-        <div>
-          <div>
-            <h3>Upcoming Events</h3>
-            <ClubEvents id={id} />
-          </div>
-
-          <div>
-            <h3>Club Feed</h3>
-            <ClubFeed id={id} />
-          </div>
-
-          {admin ? (
+      <Wrapper>
+        <TopSection>
+          <InfoWrapper>
+            <SectionTitle>Club Information</SectionTitle>
+            <h3>{club.name}</h3>
+            {club.recurring ? (
+              <p>
+                Play every {club.weekday} at {club.venue}.
+              </p>
+            ) : (
+              <p>Play based on availability.</p>
+            )}
+            {club.members.length === 0 ? (
+              <p>This club has no current members.</p>
+            ) : (
+              <div>
+                <p>Currently {club.members.length} member(s).</p>
+                <ul>
+                  {club.members.map((member) => (
+                    <li key={member.id}>
+                      {member.name} - {member.email}
+                      {admin ? (
+                        <button onClick={() => removeUser(member.id)}>
+                          Remove
+                        </button>
+                      ) : null}
+                      {isError ? (
+                        <div>
+                          <p>{errorMessage}</p>
+                        </div>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {!admin ? (
+              <div>
+                <p>
+                  Please contact any admin member if you wish to join or leave{' '}
+                  {club.name}:
+                </p>
+                <ul>
+                  {club.admin_members.map((admin) => (
+                    <li key={admin.id}>
+                      {admin.name} - {admin.email}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </InfoWrapper>
+          <EventsWrapper>
             <div>
-              <h3>{username}, control your club below:</h3>
+              <SectionTitle>Upcoming Events</SectionTitle>
+              <ClubEvents id={id} />
+            </div>
+          </EventsWrapper>
+        </TopSection>
+        <FeedWrapper>
+          <SectionTitle>Club Feed</SectionTitle>
+          <ClubFeed id={id} />
+        </FeedWrapper>
+
+        {admin ? (
+          <AdminWrapper>
+            <AddMemberWrapper>
+              <SectionTitle>{username}, control your club below:</SectionTitle>
               <p>Add Members</p>
               <FindUser
                 club={parseInt(id)}
                 members={club?.members}
                 userId={userId}
               />
-              <h3>Manage Admin Control</h3>
-              <ul>
+            </AddMemberWrapper>
+            <AddAdminWrapper>
+              <SectionTitle>Manage Admin Control</SectionTitle>
+              <AdminListWrapper>
                 {club.members.map((member) => (
-                  <li key={member.id}>
+                  <AdminListItem key={member.id}>
                     {member.name} - {member.email}.
                     {member?.admin_squads.map((squad) =>
                       squad === club.id ? (
@@ -171,13 +179,13 @@ const ClubShow = () => {
                         <p>{errorMessage}</p>
                       </div>
                     ) : null}
-                  </li>
+                  </AdminListItem>
                 ))}
-              </ul>
-            </div>
-          ) : null}
-        </div>
-      </div>
+              </AdminListWrapper>
+            </AddAdminWrapper>
+          </AdminWrapper>
+        ) : null}
+      </Wrapper>
     )
   }
 
@@ -185,3 +193,59 @@ const ClubShow = () => {
 }
 
 export default ClubShow
+const Wrapper = styled.div`
+  margin: 1rem 2rem;
+`
+const TopSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+`
+const InfoWrapper = styled.div`
+  flex: 1;
+`
+const EventsWrapper = styled.div`
+  flex: 1;
+  text-align: right;
+`
+const FeedWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+`
+const AdminWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+`
+const AddMemberWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+`
+const AddAdminWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+`
+
+const AdminListWrapper = styled.ul`
+  text-align: center;
+`
+const AdminListItem = styled.li`
+  display: flex;
+  justify-content: space-evenly;
+`
+const SectionTitle = styled.h2`
+  text-transform: capitalize;
+  text-decoration: underline;
+`

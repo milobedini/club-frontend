@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ClubCard from '../components/ClubCard'
 import { getConfig } from '../helpers/api'
-import styles from '../styles/ClubList.module.scss'
 
 const UserClubs = () => {
   const [userClubs, setUserClubs] = useState([])
@@ -26,7 +25,7 @@ const UserClubs = () => {
     return <p>Loading...</p>
   } else if (userClubs) {
     return (
-      <div className={styles.container}>
+      <div>
         {userClubs.map((club) => (
           <ClubCard key={club.id} {...club} />
         ))}

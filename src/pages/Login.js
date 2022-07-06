@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { baseUrl } from '../helpers/api'
 import { setName, setToken, setUserId } from '../helpers/auth'
-import styles from '../styles/Register.module.scss'
+import styles from '../styles/Forms.module.scss'
 
 const Login = ({ setIsLoggedIn }) => {
   const [data, setData] = useState({

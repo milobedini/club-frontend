@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { getConfig } from '../helpers/api'
-import styles from '../styles/Register.module.scss'
+import styles from '../styles/Forms.module.scss'
 import { success } from '../helpers/toast'
 
 const FindUser = ({ club, isAdmin, members, userId }) => {
@@ -59,7 +59,7 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
   }
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputContainer}>
           <div className={styles.inputDiv}>
@@ -116,7 +116,7 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
           </ul>
         </div>
       ) : null}
-    </div>
+    </>
   )
 }
 

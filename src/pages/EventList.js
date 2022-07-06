@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import EventCard from '../components/EventCard'
 import { getConfig } from '../helpers/api'
-import styles from '../styles/EventList.module.scss'
 
 const EventList = () => {
   const [userEvents, setUserEvents] = useState([])
@@ -29,7 +28,7 @@ const EventList = () => {
     return <p>Loading...</p>
   } else if (userEvents) {
     return (
-      <div className={styles.container}>
+      <div>
         {userEvents.map((fixture) => (
           <EventCard key={fixture.id} {...fixture} title />
         ))}

@@ -1,4 +1,7 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
 html,
 body {
     padding: 0;
@@ -8,6 +11,8 @@ body {
         margin: 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+    font-family: 'Varela Round', sans-serif;
+    color: #1d3557;
 }
 
 a {
@@ -57,3 +62,14 @@ input {
     border-radius: 4px;
 }
 
+.title-text {
+    font-family: 'Londrina Solid', cursive;
+}
+
+.body-text {
+    font-family: 'Varela Round', sans-serif;
+}
+
+ul {
+    list-style: none;
+}

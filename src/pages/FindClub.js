@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ClubCard from '../components/ClubCard'
 import { getConfig } from '../helpers/api'
 
-import styles from '../styles/Register.module.scss'
+import styles from '../styles/Forms.module.scss'
 
 const FindClub = () => {
   const [searchTerm, setSearchTerm] = useState('')

@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { baseUrl } from '../helpers/api'
-import styles from '../styles/Register.module.scss'
+import styles from '../styles/Forms.module.scss'
 
 const Register = () => {
   const [data, setData] = useState({

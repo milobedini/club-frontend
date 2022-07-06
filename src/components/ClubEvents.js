@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { getConfig } from '../helpers/api'
 import EventCard from './EventCard'
-import styles from '../styles/EventList.module.scss'
 
 const ClubEvents = ({ id }) => {
   const [clubEvents, setClubEvents] = useState([])
@@ -25,7 +24,7 @@ const ClubEvents = ({ id }) => {
     return <p>Loading...</p>
   } else if (clubEvents) {
     return (
-      <div className={styles.container}>
+      <div>
         {clubEvents.map((fixture) => (
           <EventCard key={fixture.id} {...fixture} title={false} />
         ))}
