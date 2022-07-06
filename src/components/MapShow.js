@@ -29,10 +29,21 @@ const MapShow = (props) => {
           bearing: 0,
           pitch: 0,
         }}
+        viewState={
+          props.search && {
+            latitude: props.lat,
+            longitude: props.long,
+            zoom: props.zoom,
+            bearing: 0,
+            pitch: 0,
+          }
+        }
         scrollZoom={false}
+        touchZoomRotate={false}
+        touchPitch={false}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={mapboxToken}
-        attributionControl={false}
+        // attributionControl={false}
       >
         <GeolocateControl position="top-left" />
         <FullscreenControl position="top-left" />
