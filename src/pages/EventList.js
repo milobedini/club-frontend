@@ -23,9 +23,17 @@ const EventList = () => {
   }, [])
 
   if (userEvents && userEvents.length === 0) {
-    return <p>No future events.</p>
+    return (
+      <div>
+        <p>No future events.</p>
+      </div>
+    )
   } else if (!userEvents) {
-    return <p>Loading...</p>
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    )
   } else if (userEvents) {
     return (
       <div>

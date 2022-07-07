@@ -4,6 +4,10 @@ import { useState } from 'react'
 import { getConfig } from '../helpers/api'
 import styles from '../styles/Forms.module.scss'
 import { success } from '../helpers/toast'
+import { Body, Subtitle } from '../styles/styled'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserPlus, faUserSlash } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components'
 
 const FindUser = ({ club, isAdmin, members, userId }) => {
   // Will use isAdmin so that only admin squad members can add or remove others.
@@ -84,34 +88,43 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
         <div>
           <ul>
             {results.map((result) => (
-              <div key={result.id}>
-                <li>
-                  <p>{result.name}</p>
-                  <p>{result.email}</p>
+              <AdminListItem key={result.id}>
+                <AdminNameEmail>
+                  <Subtitle>{result.name}</Subtitle>
+                  <Body>{result.email}</Body>
+                </AdminNameEmail>
 
-                  {result?.squads.map((squad) =>
-                    squad.id === club ? (
-                      <div key={squad.id}>
-                        <p>Already in Club</p>
-                        <button onClick={() => removeUser(result.id)}>
-                          Remove from Club
-                        </button>
-                      </div>
-                    ) : null
-                  )}
-                  {result.squads.length === 0 ? (
-                    <button onClick={() => addUser(result.id)}>
-                      Add to Club
-                    </button>
-                  ) : null}
-
-                  {isError ? (
-                    <div className={styles.error}>
-                      <p>{errorMessage}</p>
+                {result?.squads.map((squad) =>
+                  squad.id === club ? (
+                    <div key={squad.id}>
+                      <FontAwesomeIcon
+                        icon={faUserSlash}
+                        height="1.2rem"
+                        width="1.2rem"
+                        color="#e63946"
+                        nClick={() => removeUser(result.id)}
+                      />
                     </div>
-                  ) : null}
-                </li>
-              </div>
+                  ) : null
+                )}
+                {result.squads.length === 0 ? (
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faUserPlus}
+                      height="1.2rem"
+                      width="1.2rem"
+                      color="#28d79a"
+                      onClick={() => addUser(result.id)}
+                    />
+                  </div>
+                ) : null}
+
+                {isError ? (
+                  <div className={styles.error}>
+                    <p>{errorMessage}</p>
+                  </div>
+                ) : null}
+              </AdminListItem>
             ))}
           </ul>
         </div>
@@ -121,3 +134,13 @@ const FindUser = ({ club, isAdmin, members, userId }) => {
 }
 
 export default FindUser
+
+const AdminListItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+`
+const AdminNameEmail = styled.p`
+  padding: 0 1rem;
+`

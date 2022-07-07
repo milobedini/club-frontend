@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Body, CardWrapper, Subtitle, Title } from '../styles/styled'
 
 const ClubCard = ({
   id,
@@ -12,20 +13,20 @@ const ClubCard = ({
   weekday,
 }) => {
   return (
-    <div>
+    <CardWrapper>
       <Link to={`/clubs/${id}/`}>
-        <h2>{name}</h2>
-        <h5>{sport}</h5>
-        <p>Currently {members.length} members.</p>
+        <Title>{name}</Title>
+        <Subtitle>{sport}</Subtitle>
+        <Body>Currently {members.length} members.</Body>
         {recurring ? (
-          <p>
+          <Body>
             Play every {weekday} at {venue}.
-          </p>
+          </Body>
         ) : (
-          <p>Play based on availability.</p>
+          <Body>Play based on availability.</Body>
         )}
       </Link>
-    </div>
+    </CardWrapper>
   )
 }
 

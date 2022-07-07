@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ClubCard from '../components/ClubCard'
 import { getConfig } from '../helpers/api'
+import { Wrapper } from '../styles/styled'
 
 const UserClubs = () => {
   const [userClubs, setUserClubs] = useState([])
@@ -20,16 +21,24 @@ const UserClubs = () => {
   }, [])
 
   if (userClubs && userClubs.length === 0) {
-    return <p>No clubs</p>
+    return (
+      <Wrapper>
+        <p>No Clubs</p>
+      </Wrapper>
+    )
   } else if (!userClubs) {
-    return <p>Loading...</p>
+    return (
+      <Wrapper>
+        <p>Loading...</p>
+      </Wrapper>
+    )
   } else if (userClubs) {
     return (
-      <div>
+      <Wrapper>
         {userClubs.map((club) => (
           <ClubCard key={club.id} {...club} />
         ))}
-      </div>
+      </Wrapper>
     )
   }
 }

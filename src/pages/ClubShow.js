@@ -9,6 +9,9 @@ import { success } from '../helpers/toast'
 import FindUser from '../components/FindUser'
 import ClubFeed from '../components/ClubFeed'
 import styled from 'styled-components'
+import { Body, Subtitle, Title } from '../styles/styled'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserSlash, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 const ClubShow = () => {
   const [club, setClub] = useState({})
@@ -81,8 +84,8 @@ const ClubShow = () => {
       <Wrapper>
         <TopSection>
           <InfoWrapper>
-            <SectionTitle>Club Information</SectionTitle>
-            <h3>{club.name}</h3>
+            <Title>Club Information</Title>
+            <Title>{club.name}</Title>
             {club.recurring ? (
               <p>
                 Play every {club.weekday} at {club.venue}.
@@ -132,20 +135,20 @@ const ClubShow = () => {
           </InfoWrapper>
           <EventsWrapper>
             <div>
-              <SectionTitle>Upcoming Events</SectionTitle>
+              <Title>Upcoming Events</Title>
               <ClubEvents id={id} />
             </div>
           </EventsWrapper>
         </TopSection>
         <FeedWrapper>
-          <SectionTitle>Club Feed</SectionTitle>
+          <Title>Club Feed</Title>
           <ClubFeed id={id} />
         </FeedWrapper>
 
         {admin ? (
           <AdminWrapper>
             <AddMemberWrapper>
-              <SectionTitle>{username}, control your club below:</SectionTitle>
+              <Title>{username}, control your club below:</Title>
               <p>Add Members</p>
               <FindUser
                 club={parseInt(id)}
@@ -154,25 +157,37 @@ const ClubShow = () => {
               />
             </AddMemberWrapper>
             <AddAdminWrapper>
-              <SectionTitle>Manage Admin Control</SectionTitle>
+              <Title>Manage Admin Control</Title>
               <AdminListWrapper>
                 {club.members.map((member) => (
                   <AdminListItem key={member.id}>
-                    {member.name} - {member.email}.
+                    <AdminNameEmail>
+                      <Subtitle>{member.name}</Subtitle>
+                      <Body>{member.email}</Body>
+                    </AdminNameEmail>
                     {member?.admin_squads.map((squad) =>
                       squad === club.id ? (
                         <div key={squad}>
-                          <p>Already Admin</p>
-                          <button onClick={() => addAsAdmin(member.id, false)}>
-                            Remove as Admin
-                          </button>
+                          <FontAwesomeIcon
+                            icon={faUserSlash}
+                            height="1.2rem"
+                            width="1.2rem"
+                            color="#e63946"
+                            onClick={() => addAsAdmin(member.id, false)}
+                          />
                         </div>
                       ) : null
                     )}
                     {member.admin_squads.length === 0 ? (
-                      <button onClick={() => addAsAdmin(member.id)}>
-                        Add as admin member.
-                      </button>
+                      <div key={member.id}>
+                        <FontAwesomeIcon
+                          icon={faUserPlus}
+                          height="1.2rem"
+                          width="1.2rem"
+                          color="#28d79a"
+                          onClick={() => addAsAdmin(member.id, false)}
+                        />
+                      </div>
                     ) : null}
                     {isError ? (
                       <div>
@@ -243,9 +258,9 @@ const AdminListWrapper = styled.ul`
 `
 const AdminListItem = styled.li`
   display: flex;
-  justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
 `
-const SectionTitle = styled.h2`
-  text-transform: capitalize;
-  text-decoration: underline;
+const AdminNameEmail = styled.p`
+  padding: 0 1rem;
 `
