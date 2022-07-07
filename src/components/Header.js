@@ -46,8 +46,9 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
                   className="text-black"
                 >
                   <NavDropdown.Item href="/profile/">Profile</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Inbox</NavDropdown.Item>
-
+                  <NavDropdown.Item href="/clubs/user">Clubs</NavDropdown.Item>
+                  <NavDropdown.Item href="/events">Events</NavDropdown.Item>
+                  <NavDropdown.Item href="">Inbox</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={handleLogout}>
                     Sign Out

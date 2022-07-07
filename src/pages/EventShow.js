@@ -6,6 +6,9 @@ import styled from 'styled-components'
 import { getConfig } from '../helpers/api'
 import { dateOptions, timeUntil } from '../helpers/date'
 import MapShow from '../components/MapShow'
+import { Body, Subtitle, Title } from '../styles/styled'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 
 const EventShow = () => {
   const [event, setEvent] = useState({})
@@ -31,28 +34,35 @@ const EventShow = () => {
     return (
       <Wrapper>
         <InfoWrapper>
-          <h3>
+          <Title>
             <Link to={`/clubs/${clubId}/`}>
               <span>{event.club.name}'s </span>
             </Link>
             fixture.
-          </h3>
-          <p>
-            {new Date(event.time).toLocaleDateString(undefined, dateOptions)}
-          </p>
-          <p>
-            {event.location} in {timeUntil(new Date(event.time))}.
-          </p>
-          <p>
+          </Title>
+          <Subtitle>
+            {event.location},{' '}
+            {new Date(event.time).toLocaleDateString(undefined, dateOptions)} -
+            in {timeUntil(new Date(event.time))} time.
+          </Subtitle>
+          <Body>
             Currently {event.participants.length} spots out of{' '}
             {event.total_players} have been filled.
-          </p>
-          <h3>Participating:</h3>
+          </Body>
+          <Subtitle>Participating:</Subtitle>
           <ul>
             {event.participants.map((player) => (
-              <li key={player.id}>
-                {player.name} - {player.email}
-              </li>
+              <ParticipantItem key={player.id}>
+                <FontAwesomeIcon
+                  icon={faAnglesRight}
+                  height="1.2rem"
+                  width="1.2rem"
+                  color="#28d79a"
+                />
+                <Body>
+                  {player.name} - {player.email}
+                </Body>
+              </ParticipantItem>
             ))}
           </ul>
           {event.financier ? (
@@ -93,4 +103,8 @@ const InfoWrapper = styled.div`
 const MapWrapper = styled.div`
   height: 100%;
   width: 100%;
+`
+const ParticipantItem = styled.li`
+  display: flex;
+  align-items: center;
 `

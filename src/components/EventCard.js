@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { dateOptions, timeUntil } from '../helpers/date'
+import { Body, CardWrapper, Subtitle, Title } from '../styles/styled'
 
 const EventCard = ({
   id,
@@ -14,26 +15,27 @@ const EventCard = ({
   title,
 }) => {
   return (
-    <div>
+    <CardWrapper>
       <Link to={`/events/${club.id}/${id}/`}>
-        {title ? <h2>{club.name}'s fixture.</h2> : null}
-        <p>{new Date(time).toLocaleDateString(undefined, dateOptions)}</p>
-        <p>
-          {location} in {timeUntil(new Date(time))}.
-        </p>
-        <p>
+        {title ? <Title>{club.name}'s fixture</Title> : null}
+        <Subtitle>
+          {location},{' '}
+          {new Date(time).toLocaleDateString(undefined, dateOptions)} - in{' '}
+          {timeUntil(new Date(time))} time.
+        </Subtitle>
+        <Body>
           Currently {participants.length} spots out of {total_players} have been
           filled.
-        </p>
+        </Body>
         {financier ? (
-          <p>
+          <Body>
             {financier.name} paid £{total_cost} for this event.
-          </p>
+          </Body>
         ) : (
-          <p>£{total_cost} is due for this event.</p>
+          <Body>£{total_cost} is due for this event.</Body>
         )}
       </Link>
-    </div>
+    </CardWrapper>
   )
 }
 

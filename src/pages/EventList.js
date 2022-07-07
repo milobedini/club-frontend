@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import EventCard from '../components/EventCard'
 import { getConfig } from '../helpers/api'
+import { Wrapper } from '../styles/styled'
 
 const EventList = () => {
   const [userEvents, setUserEvents] = useState([])
@@ -36,11 +37,11 @@ const EventList = () => {
     )
   } else if (userEvents) {
     return (
-      <div>
+      <Wrapper>
         {userEvents.map((fixture) => (
           <EventCard key={fixture.id} {...fixture} title />
         ))}
-      </div>
+      </Wrapper>
     )
   }
 }
