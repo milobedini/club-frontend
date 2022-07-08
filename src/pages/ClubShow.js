@@ -82,124 +82,135 @@ const ClubShow = () => {
   } else if (club && club.members) {
     return (
       <Wrapper>
-        <TopSection>
-          <InfoWrapper>
-            <Title>Club Information</Title>
-            <Title>{club.name}</Title>
-            {club.recurring ? (
-              <p>
-                Play every {club.weekday} at {club.venue}.
-              </p>
-            ) : (
-              <p>Play based on availability.</p>
-            )}
-            {club.members.length === 0 ? (
-              <p>This club has no current members.</p>
-            ) : (
+        <ContentWrapper>
+          <TopSection>
+            <InfoWrapper>
+              <Title>Club Information</Title>
+              <Title>{club.name}</Title>
+              {club.recurring ? (
+                <p>
+                  Play every {club.weekday} at {club.venue}.
+                </p>
+              ) : (
+                <p>Play based on availability.</p>
+              )}
+              {club.members.length === 0 ? (
+                <p>This club has no current members.</p>
+              ) : (
+                <div>
+                  <p>Currently {club.members.length} member(s).</p>
+                  <ul>
+                    {club.members.map((member) => (
+                      <li key={member.id}>
+                        {member.name} - {member.email}
+                        {admin ? (
+                          <FontAwesomeIcon
+                            icon={faUserSlash}
+                            height="1.2rem"
+                            width="1.2rem"
+                            color="#e63946"
+                            onClick={() => removeUser(member.id)}
+                            style={{ marginLeft: '0.5rem', cursor: 'pointer' }}
+                          />
+                        ) : null}
+                        {isError ? (
+                          <div>
+                            <p>{errorMessage}</p>
+                          </div>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {!admin ? (
+                <div>
+                  <p>
+                    Please contact any admin member if you wish to join or leave{' '}
+                    {club.name}:
+                  </p>
+                  <ul>
+                    {club.admin_members.map((admin) => (
+                      <li key={admin.id}>
+                        {admin.name} - {admin.email}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </InfoWrapper>
+            <EventsWrapper>
               <div>
-                <p>Currently {club.members.length} member(s).</p>
-                <ul>
+                <Title>Upcoming Events</Title>
+                <ClubEvents id={id} />
+              </div>
+            </EventsWrapper>
+          </TopSection>
+          <FeedWrapper>
+            <Title>Club Feed</Title>
+            <ClubFeed id={id} />
+          </FeedWrapper>
+
+          {admin ? (
+            <AdminWrapper>
+              <AddMemberWrapper>
+                <Title>{username}, control your club below:</Title>
+                <p>Add Members</p>
+                <FindUser
+                  club={parseInt(id)}
+                  members={club?.members}
+                  userId={userId}
+                />
+              </AddMemberWrapper>
+              <AddAdminWrapper>
+                <Title>Manage Admin Control</Title>
+                <AdminListWrapper>
                   {club.members.map((member) => (
-                    <li key={member.id}>
-                      {member.name} - {member.email}
-                      {admin ? (
-                        <button onClick={() => removeUser(member.id)}>
-                          Remove
-                        </button>
+                    <AdminListItem key={member.id}>
+                      <AdminNameEmail>
+                        <Subtitle>{member.name}</Subtitle>
+                        <Body>{member.email}</Body>
+                      </AdminNameEmail>
+                      {member?.admin_squads.map((squad) =>
+                        squad === club.id ? (
+                          <div key={squad}>
+                            <FontAwesomeIcon
+                              icon={faUserSlash}
+                              height="1.2rem"
+                              width="1.2rem"
+                              color="#e63946"
+                              onClick={() => addAsAdmin(member.id, false)}
+                              style={{
+                                cursor: 'pointer',
+                              }}
+                            />
+                          </div>
+                        ) : null
+                      )}
+                      {member.admin_squads.length === 0 ? (
+                        <div key={member.id}>
+                          <FontAwesomeIcon
+                            icon={faUserPlus}
+                            height="1.2rem"
+                            width="1.2rem"
+                            color="#28d79a"
+                            onClick={() => addAsAdmin(member.id, false)}
+                            style={{ cursor: 'pointer' }}
+                          />
+                        </div>
                       ) : null}
                       {isError ? (
                         <div>
                           <p>{errorMessage}</p>
                         </div>
                       ) : null}
-                    </li>
+                    </AdminListItem>
                   ))}
-                </ul>
-              </div>
-            )}
-            {!admin ? (
-              <div>
-                <p>
-                  Please contact any admin member if you wish to join or leave{' '}
-                  {club.name}:
-                </p>
-                <ul>
-                  {club.admin_members.map((admin) => (
-                    <li key={admin.id}>
-                      {admin.name} - {admin.email}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </InfoWrapper>
-          <EventsWrapper>
-            <div>
-              <Title>Upcoming Events</Title>
-              <ClubEvents id={id} />
-            </div>
-          </EventsWrapper>
-        </TopSection>
-        <FeedWrapper>
-          <Title>Club Feed</Title>
-          <ClubFeed id={id} />
-        </FeedWrapper>
-
-        {admin ? (
-          <AdminWrapper>
-            <AddMemberWrapper>
-              <Title>{username}, control your club below:</Title>
-              <p>Add Members</p>
-              <FindUser
-                club={parseInt(id)}
-                members={club?.members}
-                userId={userId}
-              />
-            </AddMemberWrapper>
-            <AddAdminWrapper>
-              <Title>Manage Admin Control</Title>
-              <AdminListWrapper>
-                {club.members.map((member) => (
-                  <AdminListItem key={member.id}>
-                    <AdminNameEmail>
-                      <Subtitle>{member.name}</Subtitle>
-                      <Body>{member.email}</Body>
-                    </AdminNameEmail>
-                    {member?.admin_squads.map((squad) =>
-                      squad === club.id ? (
-                        <div key={squad}>
-                          <FontAwesomeIcon
-                            icon={faUserSlash}
-                            height="1.2rem"
-                            width="1.2rem"
-                            color="#e63946"
-                            onClick={() => addAsAdmin(member.id, false)}
-                          />
-                        </div>
-                      ) : null
-                    )}
-                    {member.admin_squads.length === 0 ? (
-                      <div key={member.id}>
-                        <FontAwesomeIcon
-                          icon={faUserPlus}
-                          height="1.2rem"
-                          width="1.2rem"
-                          color="#28d79a"
-                          onClick={() => addAsAdmin(member.id, false)}
-                        />
-                      </div>
-                    ) : null}
-                    {isError ? (
-                      <div>
-                        <p>{errorMessage}</p>
-                      </div>
-                    ) : null}
-                  </AdminListItem>
-                ))}
-              </AdminListWrapper>
-            </AddAdminWrapper>
-          </AdminWrapper>
-        ) : null}
+                </AdminListWrapper>
+              </AddAdminWrapper>
+            </AdminWrapper>
+          ) : null}
+        </ContentWrapper>
       </Wrapper>
     )
   }
@@ -208,14 +219,15 @@ const ClubShow = () => {
 }
 
 export default ClubShow
-const Wrapper = styled.div`
-  margin: 1rem 2rem;
-`
+const Wrapper = styled.div``
+
+const ContentWrapper = styled.div``
+
 const TopSection = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid black;
   margin-bottom: 1rem;
+  padding: 1rem 2rem 0 2rem;
 `
 const InfoWrapper = styled.div`
   flex: 1;
@@ -230,8 +242,8 @@ const FeedWrapper = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-bottom: 1px solid black;
   margin-bottom: 1rem;
+  background: #a8dadc;
 `
 const AdminWrapper = styled.div`
   display: flex;

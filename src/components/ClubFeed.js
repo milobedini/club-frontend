@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import styled from 'styled-components'
 import { getConfig } from '../helpers/api'
 import PostCard from './PostCard'
 
@@ -40,13 +41,17 @@ const ClubFeed = ({ id }) => {
     return <p>Loading...</p>
   } else if (posts) {
     return (
-      <div>
+      <PostWrapper>
         {posts.map((post) => (
           <PostCard key={post.id} {...post} />
         ))}
-      </div>
+      </PostWrapper>
     )
   }
 }
 
 export default ClubFeed
+
+const PostWrapper = styled.div`
+  width: 80%;
+`

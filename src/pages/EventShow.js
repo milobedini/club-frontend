@@ -36,9 +36,9 @@ const EventShow = () => {
         <InfoWrapper>
           <Title>
             <Link to={`/clubs/${clubId}/`}>
-              <span>{event.club.name}'s </span>
+              <ClubLink>{event.club.name}'s </ClubLink>
             </Link>
-            fixture.
+            fixture
           </Title>
           <Subtitle>
             {event.location},{' '}
@@ -53,12 +53,15 @@ const EventShow = () => {
           <ul>
             {event.participants.map((player) => (
               <ParticipantItem key={player.id}>
-                <FontAwesomeIcon
-                  icon={faAnglesRight}
-                  height="1.2rem"
-                  width="1.2rem"
-                  color="#28d79a"
-                />
+                <p>
+                  <FontAwesomeIcon
+                    icon={faAnglesRight}
+                    height="1.2rem"
+                    width="1.2rem"
+                    color="#28d79a"
+                    style={{ marginRight: '0.5rem' }}
+                  />
+                </p>
                 <Body>
                   {player.name} - {player.email}
                 </Body>
@@ -66,22 +69,24 @@ const EventShow = () => {
             ))}
           </ul>
           {event.financier ? (
-            <p>
+            <Body>
               {event.financier.name} paid £{event.total_cost} for this event.
-            </p>
+            </Body>
           ) : (
-            <p>£{event.total_cost} is due for this event.</p>
+            <Body>£{event.total_cost} is due for this event.</Body>
           )}
         </InfoWrapper>
         {event.longitude && event.latitude ? (
           <MapWrapper>
-            <h3>Location</h3>
-            <MapShow
-              long={event.longitude}
-              lat={event.latitude}
-              label={event.location}
-              zoom={12}
-            />
+            <MapContainer>
+              <Title>Location</Title>
+              <MapShow
+                long={event.longitude}
+                lat={event.latitude}
+                label={event.location}
+                zoom={12}
+              />
+            </MapContainer>
           </MapWrapper>
         ) : null}
       </Wrapper>
@@ -101,10 +106,19 @@ const InfoWrapper = styled.div`
 `
 
 const MapWrapper = styled.div`
+  height: 75vh;
+`
+
+const MapContainer = styled.div`
   height: 100%;
   width: 100%;
 `
 const ParticipantItem = styled.li`
   display: flex;
   align-items: center;
+`
+const ClubLink = styled.span`
+  &:hover {
+    color: #e63946;
+  }
 `

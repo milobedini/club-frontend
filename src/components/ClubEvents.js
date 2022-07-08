@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
+import styled from 'styled-components'
 import { getConfig } from '../helpers/api'
 import EventCard from './EventCard'
 
@@ -24,13 +25,17 @@ const ClubEvents = ({ id }) => {
     return <p>Loading...</p>
   } else if (clubEvents) {
     return (
-      <div>
+      <Wrapper>
         {clubEvents.map((fixture) => (
           <EventCard key={fixture.id} {...fixture} title={false} />
         ))}
-      </div>
+      </Wrapper>
     )
   }
 }
 
 export default ClubEvents
+
+const Wrapper = styled.div`
+  margin: 1rem 0;
+`

@@ -39,7 +39,6 @@ const MapShow = (props) => {
           }
         }
         scrollZoom={false}
-        touchZoomRotate={false}
         touchPitch={false}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={mapboxToken}
