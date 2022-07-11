@@ -65,7 +65,7 @@ const CreateClub = () => {
 
     const createClub = async () => {
       try {
-        const res = await axios.post(
+        await axios.post(
           'https://club-mb.herokuapp.com/api/squads/',
           {
             name: data.name,
