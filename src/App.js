@@ -15,6 +15,7 @@ import EventShow from './pages/EventShow'
 import Profile from './pages/Profile'
 import FindClub from './pages/FindClub'
 import MapSearch from './pages/MapSearch'
+import CreateClub from './pages/CreateClub'
 
 function App() {
   // TO DO
@@ -65,6 +66,7 @@ function App() {
             <Route path="/clubs/user/" element={<UserClubs />} />
             <Route path="/clubs/:id/" element={<ClubShow />} />
             <Route path="/clubs/join/" element={<FindClub />} />
+            <Route path="clubs/create/" element={<CreateClub />} />
 
             {/* Event Routes */}
             <Route path="/events/" element={<EventList />} />

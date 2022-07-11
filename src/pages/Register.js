@@ -60,7 +60,7 @@ const Register = () => {
               placeholder="Your Name"
               className={styles.input}
             />
-            <label htmlFor="email"></label>
+            <label htmlFor="name"></label>
           </div>
         </div>
         <div className={styles.inputContainer}>
