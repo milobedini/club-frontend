@@ -34,6 +34,7 @@ const ClubShow = () => {
         }
       })
       setClub(res.data)
+      console.log(res.data)
     }
     getClub()
   }, [id])

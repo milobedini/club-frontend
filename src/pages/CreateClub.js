@@ -4,9 +4,10 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
-import { getPostConfig } from '../helpers/api'
+import { getToken } from '../helpers/auth'
 import { cloudinaryUploadPreset } from '../helpers/environment'
 import { sports, weekdays, yesNo } from '../helpers/select'
+import { simpleSuccess } from '../helpers/toast'
 
 const CreateClub = () => {
   // Name, sport (select), recurring (boolean), venue (optional), weekday (optional), image (optional)
@@ -31,7 +32,6 @@ const CreateClub = () => {
       ...data,
       [name]: value,
     })
-    console.log(data)
   }
 
   const handleSubmit = (event) => {
@@ -43,8 +43,6 @@ const CreateClub = () => {
     axios
       .post('https://api.cloudinary.com/v1_1/dvgbdioec/image/upload', formData)
       .then((response) => {
-        console.log(response.data)
-        console.log(response.data.public_id)
         setPublicId(response.data.public_id)
       })
   }
@@ -66,17 +64,25 @@ const CreateClub = () => {
     }
 
     const createClub = async () => {
-      const config = getPostConfig('squads', {
-        name: data.name,
-        sport: sport.value,
-        recurring: recurring.value,
-        venue: data.venue,
-        weekday: weekday.value,
-        image: publicId,
-      })
       try {
-        const res = await axios(config)
-        console.log(res.data)
+        const res = await axios.post(
+          'https://club-mb.herokuapp.com/api/squads/',
+          {
+            name: data.name,
+            sport: sport.value,
+            recurring: recurring.value,
+            venue: data.venue,
+            weekday: weekday.value,
+            image: publicId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getToken()}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        simpleSuccess(`Your club, ${data.name}, has successfully been created.`)
         navigate('/')
       } catch (err) {
         console.log(err)
@@ -84,6 +90,7 @@ const CreateClub = () => {
       }
     }
     createClub()
+    // eslint-disable-next-line
   }, [publicId])
 
   return (
@@ -151,7 +158,6 @@ const CreateClub = () => {
                   ...data,
                   image: event.target.files[0],
                 })
-                console.log(data)
               }}
               id="image"
               placeholder="Image"
