@@ -1,30 +1,43 @@
+import 'react-toastify/dist/ReactToastify.css'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
 import { getToken } from './helpers/auth'
-
+import { ToastContainer } from 'react-toastify'
 import Header from './components/Header'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
-
 import EventList from './pages/EventList'
 import UserClubs from './pages/UserClubs'
 import ClubShow from './pages/ClubShow'
 import EventShow from './pages/EventShow'
-import { ToastContainer } from 'react-toastify'
-
-import 'react-toastify/dist/ReactToastify.css'
 import Profile from './pages/Profile'
 import FindClub from './pages/FindClub'
 import MapSearch from './pages/MapSearch'
-import { render } from 'react-dom'
 
-export default function App() {
+function App() {
+  // TO DO
+
+  /* Back End
+  - User request to club admin to join club (many-to-many, similar to admin_members)
+  - Admin accept or reject requests.
+
+  Front End
+  - Request to join club via admin.
+  - Notification to admin member to accept or deny application.
+  - Sign up to fixtures.
+  - Leave fixtures and club.
+  - Create a club (react select for sport).
+        - Eventually include option for repeating venue which generates lat/long which are used for each event by default.
+  - Create a fixture (using date/time and geocoding).
+  - Enhance profile, setup Cloudinary for profile pictures, club posts and club.
+  - Consider best way to deal with Splitwise type feature.
+  
+  */
+
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  // Change to useContext or Redux to manage user state rather than prop drilling
   useEffect(() => {
     if (getToken()) {
       setIsLoggedIn(true)
@@ -68,6 +81,4 @@ export default function App() {
   )
 }
 
-export function renderToDom(container) {
-  render(<App />, container)
-}
+export default App
