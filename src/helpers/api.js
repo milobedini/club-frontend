@@ -13,3 +13,16 @@ export const getConfig = (url, method = 'get') => {
   }
   return config
 }
+
+export const getPostConfig = (url, data, method = 'post') => {
+  const config = {
+    method,
+    url: `${baseUrl}${url}/`,
+    data,
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+      'Content-Type': 'application/json',
+    },
+  }
+  return config
+}
