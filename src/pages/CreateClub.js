@@ -109,7 +109,7 @@ const CreateClub = () => {
             <Label htmlFor="name"></Label>
           </InputWrapper>
         </InputContainer>
-        <InputContainer>
+        <SelectContainer>
           <InputWrapper>
             <Select
               options={sports}
@@ -122,8 +122,8 @@ const CreateClub = () => {
               isSearchable
             />
           </InputWrapper>
-        </InputContainer>
-        <InputContainer>
+        </SelectContainer>
+        <SelectContainer>
           <InputWrapper>
             <Select
               options={yesNo}
@@ -132,7 +132,7 @@ const CreateClub = () => {
               placeholder="Recurring?"
             />
           </InputWrapper>
-        </InputContainer>
+        </SelectContainer>
         <InputContainer>
           <InputWrapper>
             <Input
@@ -145,7 +145,7 @@ const CreateClub = () => {
             <Label htmlFor="venue"></Label>
           </InputWrapper>
         </InputContainer>
-        <InputContainer>
+        <SelectContainer>
           <InputWrapper>
             <Select
               options={weekdays}
@@ -154,7 +154,7 @@ const CreateClub = () => {
               placeholder="Regular weekday?"
             />
           </InputWrapper>
-        </InputContainer>
+        </SelectContainer>
         <InputContainer>
           <InputWrapper>
             <Input
@@ -177,7 +177,7 @@ const CreateClub = () => {
       <ButtonContainer className="title-text">
         <Button onClick={handleSubmit}>
           {!processing ? (
-            <Input type={'submit'} value="Create Club" />
+            <ButtonInput type={'submit'} value="Create Club" />
           ) : (
             <span>Creating Club....</span>
           )}
@@ -215,14 +215,68 @@ const Form = styled.form`
 const InputContainer = styled.div`
   width: 100%;
   margin-top: 1.2rem;
+  min-height: 38px;
+
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  cursor: default;
+  /* display: -webkit-box; */
+  /* display: -webkit-flex; */
+  /* display: -ms-flexbox; */
+  // display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  min-height: 38px;
+  outline: 0 !important;
+  position: relative;
+  -webkit-transition: all 100ms;
+  transition: all 100ms;
+  box-sizing: border-box;
+`
+
+const SelectContainer = styled.div`
+  width: 100%;
+  margin-top: 1.2rem;
+  min-height: 38px;
 `
 
 const InputWrapper = styled.div``
 
-const Input = styled.input``
+const Input = styled.input`
+  padding: 8px 2px 2px 8px;
+  margin: 2px;
+  width: 99%;
+`
 
 const Label = styled.label``
 
-const ButtonContainer = styled.div``
+const ButtonContainer = styled.div`
+  width: 30%;
+  font-size: 1.2rem;
+  margin-top: 1.2rem;
+`
 
-const Button = styled.button``
+const Button = styled.button`
+  width: 100%;
+
+  border-radius: 20px;
+`
+
+const ButtonInput = styled.input`
+  padding: 1rem;
+  background-color: #0c1527;
+  border-radius: 20px;
+  color: #fff;
+
+  &:hover {
+    background-color: #e63946;
+  }
+`
