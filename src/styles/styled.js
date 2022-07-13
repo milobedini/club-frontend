@@ -8,10 +8,10 @@ export const Title = styled.h2`
   text-transform: capitalize;
 `
 export const CardWrapper = styled.div`
-  &:nth-child(1) {
+  &:nth-child(odd) {
     background: #f1faee;
   }
-  &:nth-child(2) {
+  &:nth-child(even) {
     background: #a8dadc;
   }
   padding: 1rem 2rem;

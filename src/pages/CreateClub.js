@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
+import styled from 'styled-components'
 import { getToken } from '../helpers/auth'
 import { cloudinaryUploadPreset } from '../helpers/environment'
 import { sports, weekdays, yesNo } from '../helpers/select'
@@ -94,63 +95,69 @@ const CreateClub = () => {
   }, [publicId])
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
-            <input
+    <Wrapper>
+      <Form onSubmit={handleSubmit}>
+        <InputContainer>
+          <InputWrapper>
+            <Input
               type="text"
               name="name"
               onChange={handleFormChange}
               id="name"
               placeholder="Your Club's Name"
             />
-            <label htmlFor="name"></label>
-          </div>
-        </div>
-        <div>
-          <Select
-            options={sports}
-            theme={customTheme}
-            onChange={setSport}
-            placeholder="Select Sport"
-            noOptionsMessage={() =>
-              'Please contact us if you wish to add another sport!'
-            }
-            isSearchable
-          />
-        </div>
-        <div>
-          <Select
-            options={yesNo}
-            theme={customTheme}
-            onChange={setRecurring}
-            placeholder="Recurring?"
-          />
-        </div>
-        <div>
-          <div>
-            <input
+            <Label htmlFor="name"></Label>
+          </InputWrapper>
+        </InputContainer>
+        <InputContainer>
+          <InputWrapper>
+            <Select
+              options={sports}
+              theme={customTheme}
+              onChange={setSport}
+              placeholder="Select Sport"
+              noOptionsMessage={() =>
+                'Please contact us if you wish to add another sport!'
+              }
+              isSearchable
+            />
+          </InputWrapper>
+        </InputContainer>
+        <InputContainer>
+          <InputWrapper>
+            <Select
+              options={yesNo}
+              theme={customTheme}
+              onChange={setRecurring}
+              placeholder="Recurring?"
+            />
+          </InputWrapper>
+        </InputContainer>
+        <InputContainer>
+          <InputWrapper>
+            <Input
               type="text"
               name="venue"
               onChange={handleFormChange}
               id="venue"
               placeholder="Club Venue - leave blank if not applicable"
             />
-            <label htmlFor="venue"></label>
-          </div>
-        </div>
-        <div>
-          <Select
-            options={weekdays}
-            theme={customTheme}
-            onChange={setWeekday}
-            placeholder="Regular weekday?"
-          />
-        </div>
-        <div>
-          <div>
-            <input
+            <Label htmlFor="venue"></Label>
+          </InputWrapper>
+        </InputContainer>
+        <InputContainer>
+          <InputWrapper>
+            <Select
+              options={weekdays}
+              theme={customTheme}
+              onChange={setWeekday}
+              placeholder="Regular weekday?"
+            />
+          </InputWrapper>
+        </InputContainer>
+        <InputContainer>
+          <InputWrapper>
+            <Input
               type="file"
               name="image"
               onChange={(event) => {
@@ -162,20 +169,20 @@ const CreateClub = () => {
               id="image"
               placeholder="Image"
             />
-            <label className="form-label" htmlFor="image"></label>
-          </div>
-        </div>
-      </form>
+            <Label className="form-Label" htmlFor="image"></Label>
+          </InputWrapper>
+        </InputContainer>
+      </Form>
 
-      <div>
-        <button onClick={handleSubmit}>
+      <ButtonContainer className="title-text">
+        <Button onClick={handleSubmit}>
           {!processing ? (
-            <input type={'submit'} value="Create Club" />
+            <Input type={'submit'} value="Create Club" />
           ) : (
             <span>Creating Club....</span>
           )}
-        </button>
-      </div>
+        </Button>
+      </ButtonContainer>
       {isError ? (
         <div>
           <p>Something went wrong. Please try again.</p>
@@ -183,8 +190,39 @@ const CreateClub = () => {
       ) : (
         <></>
       )}
-    </div>
+    </Wrapper>
   )
 }
 
 export default CreateClub
+
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  align-items: center;
+  justify-content: center;
+`
+
+const InputContainer = styled.div`
+  width: 100%;
+  margin-top: 1.2rem;
+`
+
+const InputWrapper = styled.div``
+
+const Input = styled.input``
+
+const Label = styled.label``
+
+const ButtonContainer = styled.div``
+
+const Button = styled.button``

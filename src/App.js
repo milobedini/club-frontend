@@ -20,9 +20,7 @@ import CreateClub from './pages/CreateClub'
 function App() {
   // TO DO
 
-  /* Back End
-  - User request to club admin to join club (many-to-many, similar to admin_members)
-  - Admin accept or reject requests.
+  /* 
 
   Front End
   - Request to join club via admin.
