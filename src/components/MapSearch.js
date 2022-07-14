@@ -4,7 +4,7 @@ import MapForm from './MapForm'
 import styled from 'styled-components'
 import { Subtitle } from '../styles/styled'
 
-const MapSearch = () => {
+const MapSearch = ({ setIsModalOpen }) => {
   return (
     <Wrapper>
       <ContentWrapper>
@@ -12,7 +12,7 @@ const MapSearch = () => {
         <Subtitle style={{ color: '#ffffff' }}>
           Please enter the location:
         </Subtitle>
-        <MapForm />
+        <MapForm setIsModalOpen={setIsModalOpen} />
       </ContentWrapper>
     </Wrapper>
   )
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   width: 100%;
 `
 const ContentWrapper = styled.div`
-  padding: 150px 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

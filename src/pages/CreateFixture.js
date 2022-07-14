@@ -8,7 +8,7 @@ const CreateFixture = () => {
   return (
     <Wrapper>
       <MapSearchWrapper>
-        <MapSearch />
+        <MapSearch setIsModalOpen={setIsModalOpen} />
       </MapSearchWrapper>
       {isModalOpen ? <p>Other Info</p> : null}
     </Wrapper>

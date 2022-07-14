@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import useInput from '../helpers/useInput'
 import MapShow from './MapShow'
 
-const MapForm = () => {
+const MapForm = ({ setIsModalOpen }) => {
   const address = useInput('')
   const [lat, setLat] = useState(null)
   const [long, setLong] = useState(null)
@@ -14,7 +14,12 @@ const MapForm = () => {
 
   return (
     <Wrapper>
-      <form onSubmit={(event) => event.preventDefault()}>
+      <Form
+        onSubmit={(event) => {
+          event.preventDefault()
+          setIsModalOpen(true)
+        }}
+      >
         <Input
           placeholder="Address"
           {...address}
@@ -42,8 +47,7 @@ const MapForm = () => {
           </SuggestionWrapper>
         )}
         <Button type="submit">Submit</Button>
-      </form>
-
+      </Form>
       <ResultWrapper>
         <MapWrapper>
           <MapShow
@@ -64,16 +68,25 @@ export default MapForm
 const Wrapper = styled.div`
   height: 100vh;
 `
+
+const Form = styled.form`
+  margin: 2rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 const SuggestionWrapper = styled.div`
   background: white;
-  position: absolute;
-  width: 400px;
+  width: 60%;
   padding: 10px 20px;
   border-radius: 0px 0px 10px 10px;
 `
 
 const Input = styled.input`
-  width: 400px;
+  width: 60%;
   background: white;
   border: none;
   padding: 10px 20px;
@@ -98,8 +111,11 @@ const Button = styled.button`
   font-family: Segoe UI, sans-serif;
   cursor: pointer;
   margin-top: 20px;
-  :focus {
+  &:focus {
     outline: none;
+  }
+  &:hover {
+    outline: 2px solid white;
   }
 `
 
@@ -109,7 +125,7 @@ const Suggestion = styled.p`
 `
 
 const MapWrapper = styled.div`
-  height: 80%;
+  height: 50%;
   width: 100%;
 `
 
