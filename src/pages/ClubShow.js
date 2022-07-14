@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ClubEvents from '../components/ClubEvents'
 import { getConfig } from '../helpers/api'
 import { getName, getUserId } from '../helpers/auth'
@@ -156,7 +156,14 @@ const ClubShow = () => {
             <AdminWrapper>
               <AddMemberWrapper>
                 <Title>{username}, control your club below:</Title>
-                <p>Add Members</p>
+                <Link to={`/events/${id}/create/`}>
+                  <Button>
+                    <Subtitle style={{ marginBottom: 0 }}>
+                      Register Fixture
+                    </Subtitle>
+                  </Button>
+                </Link>
+                <Subtitle>Add Members</Subtitle>
                 <FindUser
                   club={parseInt(id)}
                   members={club?.members}
@@ -276,4 +283,15 @@ const AdminListItem = styled.li`
 `
 const AdminNameEmail = styled.p`
   padding: 0 1rem;
+`
+const Button = styled.button`
+  padding: 1rem 2rem;
+  background-color: #0c1527;
+  border-radius: 20px;
+  color: #fff;
+  margin-bottom: 2rem;
+
+  &:hover {
+    background-color: #e63946;
+  }
 `

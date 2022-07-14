@@ -14,8 +14,8 @@ import ClubShow from './pages/ClubShow'
 import EventShow from './pages/EventShow'
 import Profile from './pages/Profile'
 import FindClub from './pages/FindClub'
-import MapSearch from './pages/MapSearch'
 import CreateClub from './pages/CreateClub'
+import CreateFixture from './pages/CreateFixture'
 
 function App() {
   // TO DO
@@ -69,10 +69,7 @@ function App() {
             {/* Event Routes */}
             <Route path="/events/" element={<EventList />} />
             <Route path="/events/:clubId/:id/" element={<EventShow />} />
-
-            {/* Map Test */}
-            {/* <Route path="/map/:long/:lat/" element={<MapTest />} /> */}
-            <Route path="/mapsearch/" element={<MapSearch />} />
+            <Route path="/events/:clubId/create/" element={<CreateFixture />} />
           </Routes>
           <ToastContainer />
         </main>

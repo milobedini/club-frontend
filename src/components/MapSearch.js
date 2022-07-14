@@ -1,13 +1,17 @@
 import React from 'react'
 
-import MapForm from '../components/MapForm'
+import MapForm from './MapForm'
 import styled from 'styled-components'
+import { Subtitle } from '../styles/styled'
 
 const MapSearch = () => {
   return (
     <Wrapper>
       <ContentWrapper>
-        <Title>Geocoding with Mapbox</Title>
+        <Title>Register Fixture</Title>
+        <Subtitle style={{ color: '#ffffff' }}>
+          Please enter the location:
+        </Subtitle>
         <MapForm />
       </ContentWrapper>
     </Wrapper>
