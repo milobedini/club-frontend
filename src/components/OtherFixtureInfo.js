@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 import styled from 'styled-components'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import DateTimePicker from 'react-datetime-picker'
+import 'react-datetime-picker/dist/DateTimePicker.css'
+import axios from 'axios'
+import { simpleSuccess } from '../helpers/toast'
+import { getToken } from '../helpers/auth'
 
 const customTheme = (theme) => {
   return {
@@ -17,12 +22,54 @@ const customTheme = (theme) => {
 const OtherFixtureInfo = () => {
   const [isError, setIsError] = useState(false)
   const [processing, setProcessing] = useState(false)
+  const [dateValue, onChange] = useState(new Date())
+
+  const [data, setData] = useState({
+    total_cost: null,
+    total_players: null,
+  })
 
   const location = useLocation()
+  const navigate = useNavigate()
+  const { clubId } = useParams()
 
-  const handleSubmit = () => {}
-  const handleFormChange = () => {
+  const handleFormChange = (event) => {
     console.log(location.state)
+    const { name, value } = event.target
+    setData({
+      ...data,
+      [name]: value,
+    })
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setProcessing(true)
+    try {
+      await axios.post(
+        `https://club-mb.herokuapp.com/api/events/${clubId}/`,
+
+        {
+          time: dateValue,
+          total_cost: data.total_cost,
+          total_players: data.total_players,
+          location: location.state.label,
+          latitude: location.state.lat,
+          longitude: location.state.long,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      simpleSuccess(`Your event at ${location.state.label} has been created.`)
+      navigate(`/clubs/${clubId}`)
+    } catch (error) {
+      console.log(error)
+      setIsError(true)
+    }
   }
 
   return (
@@ -32,7 +79,7 @@ const OtherFixtureInfo = () => {
       <p>{location.state.label}</p>
       <InfoForm onSubmit={handleSubmit}>
         <InfoInputContainer>
-          <InfoInputWrapper>
+          {/* <InfoInputWrapper>
             <InfoInput
               type="text"
               name="name"
@@ -41,42 +88,32 @@ const OtherFixtureInfo = () => {
               placeholder="Your Club's Name"
             />
             <Label htmlFor="name"></Label>
-          </InfoInputWrapper>
+          </InfoInputWrapper> */}
+          <DateTimePicker onChange={onChange} value={dateValue} disableClock />
         </InfoInputContainer>
-        <SelectContainer>
-          <InfoInputWrapper>
-            <Select
-              // options={sports}
-              theme={customTheme}
-              // onChange={setSport}
-              placeholder="Select Sport"
-              noOptionsMessage={() =>
-                'Please contact us if you wish to add another sport!'
-              }
-              isSearchable
-            />
-          </InfoInputWrapper>
-        </SelectContainer>
-        <SelectContainer>
-          <InfoInputWrapper>
-            <Select
-              // options={yesNo}
-              theme={customTheme}
-              // onChange={setRecurring}
-              placeholder="Recurring?"
-            />
-          </InfoInputWrapper>
-        </SelectContainer>
+
         <InfoInputContainer>
           <InfoInputWrapper>
             <InfoInput
-              type="text"
-              name="venue"
+              type="number"
+              name="total_cost"
               onChange={handleFormChange}
-              id="venue"
-              placeholder="Club Venue - leave blank if not applicable"
+              id="total_cost"
+              placeholder="Total cost"
             />
-            <Label htmlFor="venue"></Label>
+            <Label htmlFor="total_cost"></Label>
+          </InfoInputWrapper>
+        </InfoInputContainer>
+        <InfoInputContainer>
+          <InfoInputWrapper>
+            <InfoInput
+              type="number"
+              name="total_players"
+              onChange={handleFormChange}
+              id="total_players"
+              placeholder="Players required"
+            />
+            <Label htmlFor="total_players"></Label>
           </InfoInputWrapper>
         </InfoInputContainer>
         <SelectContainer>
@@ -85,27 +122,10 @@ const OtherFixtureInfo = () => {
               // options={weekdays}
               theme={customTheme}
               // onChange={setWeekday}
-              placeholder="Regular weekday?"
+              placeholder="Paid by..."
             />
           </InfoInputWrapper>
         </SelectContainer>
-        <InfoInputContainer>
-          <InfoInputWrapper>
-            <InfoInput
-              type="file"
-              name="image"
-              // onChange={(event) => {
-              //   setData({
-              //     ...data,
-              //     image: event.target.files[0],
-              //   })
-              // }}
-              id="image"
-              placeholder="Image"
-            />
-            <Label className="form-Label" htmlFor="image"></Label>
-          </InfoInputWrapper>
-        </InfoInputContainer>
       </InfoForm>
 
       <InfoButtonContainer className="title-text">
