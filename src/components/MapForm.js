@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { getConfig } from '../helpers/api'
 import useInput from '../helpers/useInput'
 import MapShow from './MapShow'
-import OtherFixtureInfo from './OtherFixtureInfo'
 
 const MapForm = ({ clubId }) => {
   const address = useInput('')
@@ -11,10 +12,25 @@ const MapForm = ({ clubId }) => {
   const [long, setLong] = useState(null)
   const [zoom, setZoom] = useState(1)
   const [label, setLabel] = useState('')
+  const [members, setMembers] = useState([])
 
   //https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const getClubMembers = async () => {
+      const config = getConfig(`squads/${clubId}`)
+      try {
+        const res = await axios(config)
+        console.log(res.data.members)
+        setMembers(res.data.members)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getClubMembers()
+  }, [clubId])
 
   return (
     <Wrapper>
@@ -23,7 +39,12 @@ const MapForm = ({ clubId }) => {
           event.preventDefault()
           console.log(clubId)
           navigate(`/events/${clubId}/create/info/`, {
-            state: { lat, long, label },
+            state: {
+              lat: lat.toFixed(7),
+              long: long.toFixed(7),
+              label,
+              members,
+            },
           })
         }}
       >

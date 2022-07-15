@@ -13,9 +13,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 const MapShow = (props) => {
-  useEffect(() => {
-    console.log('props changed', props)
-  }, [props])
+  useEffect(() => {}, [props])
 
   const [showPopup, setShowPopup] = useState(null)
 

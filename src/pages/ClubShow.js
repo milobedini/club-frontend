@@ -37,7 +37,7 @@ const ClubShow = () => {
       console.log(res.data)
     }
     getClub()
-  }, [id])
+  }, [id, club])
 
   const handleError = (error) => {
     if (error) {

@@ -23,6 +23,7 @@ const OtherFixtureInfo = () => {
   const [isError, setIsError] = useState(false)
   const [processing, setProcessing] = useState(false)
   const [dateValue, onChange] = useState(new Date())
+  const [financier, setFinancier] = useState(null)
 
   const [data, setData] = useState({
     total_cost: null,
@@ -32,6 +33,15 @@ const OtherFixtureInfo = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { clubId } = useParams()
+
+  const memberOptions = location.state.members.map((member) => {
+    return {
+      value: member.id,
+      label: member.name,
+    }
+  })
+
+  console.log(memberOptions)
 
   const handleFormChange = (event) => {
     console.log(location.state)
@@ -44,6 +54,7 @@ const OtherFixtureInfo = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    console.log(financier)
     setProcessing(true)
     try {
       await axios.post(
@@ -56,6 +67,7 @@ const OtherFixtureInfo = () => {
           location: location.state.label,
           latitude: location.state.lat,
           longitude: location.state.long,
+          financier: financier.value,
         },
         {
           headers: {
@@ -119,10 +131,12 @@ const OtherFixtureInfo = () => {
         <SelectContainer>
           <InfoInputWrapper>
             <Select
-              // options={weekdays}
+              options={memberOptions}
               theme={customTheme}
-              // onChange={setWeekday}
+              onChange={setFinancier}
               placeholder="Paid by..."
+              isSearchable
+              noOptionsMessage={() => 'No club member matches this name.'}
             />
           </InfoInputWrapper>
         </SelectContainer>
