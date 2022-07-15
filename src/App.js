@@ -16,6 +16,7 @@ import Profile from './pages/Profile'
 import FindClub from './pages/FindClub'
 import CreateClub from './pages/CreateClub'
 import CreateFixture from './pages/CreateFixture'
+import OtherFixtureInfo from './components/OtherFixtureInfo'
 
 function App() {
   // TO DO
@@ -70,6 +71,10 @@ function App() {
             <Route path="/events/" element={<EventList />} />
             <Route path="/events/:clubId/:id/" element={<EventShow />} />
             <Route path="/events/:clubId/create/" element={<CreateFixture />} />
+            <Route
+              path="/events/:clubId/create/info/"
+              element={<OtherFixtureInfo />}
+            />
           </Routes>
           <ToastContainer />
         </main>

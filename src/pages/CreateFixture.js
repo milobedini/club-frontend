@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import MapSearch from '../components/MapSearch'
 
 const CreateFixture = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { clubId } = useParams()
 
   return (
     <Wrapper>
       <MapSearchWrapper>
-        <MapSearch setIsModalOpen={setIsModalOpen} />
+        <MapSearch clubId={clubId} />
       </MapSearchWrapper>
-      {isModalOpen ? <p>Other Info</p> : null}
     </Wrapper>
   )
 }

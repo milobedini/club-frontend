@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import useInput from '../helpers/useInput'
 import MapShow from './MapShow'
+import OtherFixtureInfo from './OtherFixtureInfo'
 
-const MapForm = ({ setIsModalOpen }) => {
+const MapForm = ({ clubId }) => {
   const address = useInput('')
   const [lat, setLat] = useState(null)
   const [long, setLong] = useState(null)
@@ -12,12 +14,17 @@ const MapForm = ({ setIsModalOpen }) => {
 
   //https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/
 
+  const navigate = useNavigate()
+
   return (
     <Wrapper>
       <Form
         onSubmit={(event) => {
           event.preventDefault()
-          setIsModalOpen(true)
+          console.log(clubId)
+          navigate(`/events/${clubId}/create/info/`, {
+            state: { lat, long, label },
+          })
         }}
       >
         <Input
