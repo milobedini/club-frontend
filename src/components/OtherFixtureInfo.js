@@ -92,16 +92,6 @@ const OtherFixtureInfo = () => {
       <p>{location.state.label}</p>
       <InfoForm onSubmit={handleSubmit}>
         <InfoInputContainer>
-          {/* <InfoInputWrapper>
-            <InfoInput
-              type="text"
-              name="name"
-              onChange={handleFormChange}
-              id="name"
-              placeholder="Your Club's Name"
-            />
-            <Label htmlFor="name"></Label>
-          </InfoInputWrapper> */}
           <DateTimePicker onChange={onChange} value={dateValue} disableClock />
         </InfoInputContainer>
 
@@ -146,9 +136,9 @@ const OtherFixtureInfo = () => {
       <InfoButtonContainer className="title-text">
         <InfoButton onClick={handleSubmit}>
           {!processing ? (
-            <InfoButtonInput type={'submit'} value="Create Club" />
+            <InfoButtonInput type={'submit'} value="Create Fixture" />
           ) : (
-            <span>Creating Club....</span>
+            <span>Creating Fixture....</span>
           )}
         </InfoButton>
       </InfoButtonContainer>

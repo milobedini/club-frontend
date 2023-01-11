@@ -22,7 +22,6 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
     <Navbar
       collapseOnSelect
       expand="lg"
-      // bg="dark"
       variant="dark"
       sticky="top"
       className={styles.container}
