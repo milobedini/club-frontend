@@ -7,6 +7,7 @@ import 'react-datetime-picker/dist/DateTimePicker.css'
 import axios from 'axios'
 import { simpleSuccess } from '../helpers/toast'
 import { getToken } from '../helpers/auth'
+import { baseUrl } from '../helpers/api'
 
 const customTheme = (theme) => {
   return {
@@ -58,7 +59,7 @@ const OtherFixtureInfo = () => {
     setProcessing(true)
     try {
       await axios.post(
-        `https://club-mb.herokuapp.com/api/events/${clubId}/`,
+        `${baseUrl}events/${clubId}/`,
 
         {
           time: dateValue,

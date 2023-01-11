@@ -1,6 +1,6 @@
 import { getToken } from './auth'
 
-export const baseUrl = 'https://club-mb.herokuapp.com/api/'
+export const baseUrl = 'http://localhost:8000/api/'
 
 export const getConfig = (url, method = 'get') => {
   const config = {

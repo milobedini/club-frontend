@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import styled from 'styled-components'
+import { baseUrl } from '../helpers/api'
 import { getToken } from '../helpers/auth'
 import { cloudinaryUploadPreset } from '../helpers/environment'
 import { sports, weekdays, yesNo } from '../helpers/select'
@@ -67,7 +68,7 @@ const CreateClub = () => {
     const createClub = async () => {
       try {
         await axios.post(
-          'https://club-mb.herokuapp.com/api/squads/',
+          `${baseUrl}https://club-mb.herokuapp.com/api/squads/`,
           {
             name: data.name,
             sport: sport.value,
